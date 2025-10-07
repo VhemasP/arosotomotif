@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           ),
           // Overlay gelap (tetap sama)
           Container(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withValues(alpha: 0.5),
           ),
 
           Center(
@@ -115,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: Text(
                   "Copyright by Vhemas Dwi",
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withValues(alpha: 0.7),
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),

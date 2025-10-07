@@ -1,20 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+import 'providers/favorite_provider.dart';
 import 'model/kendaraan.dart';
 import 'model/mobil.dart';
 import 'model/motor.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final Kendaraan kendaraan;
 
   const DetailScreen({super.key, required this.kendaraan});
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  double _userRating = 3.5;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(kendaraan.nama),
+        title: Text(widget.kendaraan.nama),
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
+        actions: [
+          Consumer<FavoritesProvider>(
+            builder: (context, provider, child) => IconButton(
+              icon: Icon(
+                provider.isFavorite(widget.kendaraan.nama)
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                color: Colors.white,
+              ),
+              tooltip: 'Add to Favorites',
+              onPressed: () {
+                provider.toggleFavorite(widget.kendaraan.nama);
+              },
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -37,7 +63,7 @@ class DetailScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
                 child: Image.network(
-                  kendaraan.imageUrl,
+                  widget.kendaraan.imageUrl,
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) =>
                   const Icon(Icons.broken_image, size: 100, color: Colors.grey),
@@ -45,13 +71,14 @@ class DetailScreen extends StatelessWidget {
               ),
             ),
 
+            // Bagian Nama dan Harga
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    kendaraan.nama,
+                    widget.kendaraan.nama,
                     style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -60,7 +87,7 @@ class DetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    kendaraan.harga,
+                    widget.kendaraan.harga,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w500,
@@ -70,8 +97,12 @@ class DetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(height: 32, thickness: 1, indent: 16, endIndent: 16),
 
+            _buildRatingSection(),
+
+            const Divider(height: 24, thickness: 1, indent: 16, endIndent: 16),
+
+            // Bagian Spesifikasi
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -82,13 +113,14 @@ class DetailScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  if (kendaraan is Mobil) ...[
-                    _buildDetailRow("Tipe", (kendaraan as Mobil).tipe),
-                    _buildDetailRow("Mesin", (kendaraan as Mobil).spekMesin),
-                    _buildDetailRow("Kapasitas", (kendaraan as Mobil).kapasitasPenumpang),
-                  ] else if (kendaraan is Motor) ...[
-                    _buildDetailRow("Tipe Mesin", (kendaraan as Motor).tipeMesin),
-                    _buildDetailRow("Kapasitas", (kendaraan as Motor).kapasitasMesin),
+                  // Menggunakan 'widget.kendaraan' untuk akses properti dari StatefulWidget
+                  if (widget.kendaraan is Mobil) ...[
+                    _buildDetailRow("Tipe", (widget.kendaraan as Mobil).tipe),
+                    _buildDetailRow("Mesin", (widget.kendaraan as Mobil).spekMesin),
+                    _buildDetailRow("Kapasitas", (widget.kendaraan as Mobil).kapasitasPenumpang),
+                  ] else if (widget.kendaraan is Motor) ...[
+                    _buildDetailRow("Tipe Mesin", (widget.kendaraan as Motor).tipeMesin),
+                    _buildDetailRow("Kapasitas", (widget.kendaraan as Motor).kapasitasMesin),
                   ],
                 ],
               ),
@@ -121,6 +153,56 @@ class DetailScreen extends StatelessWidget {
               color: Colors.black87,
               fontWeight: FontWeight.bold,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRatingSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Beri Rating Anda",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              RatingBar.builder(
+                initialRating: _userRating,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  setState(() {
+                    _userRating = rating;
+                  });
+                },
+              ),
+              const SizedBox(width: 12),
+              Text(
+                _userRating.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue.shade800,
+                ),
+              )
+            ],
           ),
         ],
       ),

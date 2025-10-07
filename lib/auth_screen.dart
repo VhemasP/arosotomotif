@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'model/user.dart';
+import 'main_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(user: user),
+          builder: (context) => MainScreen(user: user),
         ),
       );
     }
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Container(color: Colors.black.withOpacity(0.5)),
+          Container(color: Colors.black.withValues(alpha: 0.5)),
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
@@ -235,7 +236,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-          Container(color: Colors.black.withOpacity(0.5)),
+          Container(color: Colors.black.withValues(alpha: 0.5)),
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
@@ -245,7 +246,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Image.asset('assets/images/logo.png', height: 100),
+                    Image.asset('assets/images/logo2.png', height: 100),
                     const SizedBox(height: 24.0),
                     const Text('Buat Akun Baru',
                         textAlign: TextAlign.center,
