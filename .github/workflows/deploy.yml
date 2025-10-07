@@ -1,4 +1,4 @@
-name: Deploy Flutter Web to GitHub Pages
+name: Deploy Flutter Web to .github Pages
 
 # Pemicu: Jalankan workflow ini setiap kali ada push ke branch 'main'
 on:
@@ -23,7 +23,7 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --release --base-href="/arosotomotif/"
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to .github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
