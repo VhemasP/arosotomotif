@@ -5,12 +5,12 @@ import 'motor.dart';
 final List<Kendaraan> vehicleList = [
   // MOBIL
   Mobil(
-    nama: "Toyota GR Supra R",
+    nama: "Toyota GR Supra",
     tipe: "Sports Car",
     spekMesin: "3.0L Turbo",
     kapasitasPenumpang: "2 Seater",
     harga: "Rp 2.1 Milyar",
-    imageUrl: "https://i.pinimg.com/1200x/4c/dc/fb/4cdcfbd8d22bc705773d71eee8e083d4.jpg",
+    imageUrl: "https://i.imgur.com/As7ff42.png",
   ),
   Mobil(
     nama: "Mitsubishi Pajero Sport",
@@ -18,7 +18,7 @@ final List<Kendaraan> vehicleList = [
     spekMesin: "2.4L Diesel",
     kapasitasPenumpang: "7 Seater",
     harga: "Rp 740 Juta",
-    imageUrl: "https://i.pinimg.com/736x/15/fa/cc/15facc81d6d92b92f0f141f7df173306.jpg",
+    imageUrl: "https://i.imgur.com/N3bK7dY.png",
   ),
   Mobil(
     nama: "Honda Civic Type R",
@@ -26,7 +26,7 @@ final List<Kendaraan> vehicleList = [
     spekMesin: "2.0L VTEC Turbo",
     kapasitasPenumpang: "4 Seater",
     harga: "Rp 1.4 Milyar",
-    imageUrl: "https://i.pinimg.com/1200x/2e/9f/1c/2e9f1c2901cf1648dae8199fa3cf6a56.jpg",
+    imageUrl: "https://i.imgur.com/VKT40Yy.png",
   ),
   Mobil(
     nama: "Hyundai Ioniq 5",
@@ -34,7 +34,7 @@ final List<Kendaraan> vehicleList = [
     spekMesin: "72.6 kWh",
     kapasitasPenumpang: "5 Seater",
     harga: "Rp 860 Juta",
-    imageUrl: "https://i.pinimg.com/736x/9e/d6/15/9ed615fd8c7fc03204fa03334b72e614.jpg",
+    imageUrl: "https://i.imgur.com/h52s6s6.png",
   ),
   Mobil(
     nama: "Lamborghini Aventador",
@@ -42,7 +42,7 @@ final List<Kendaraan> vehicleList = [
     spekMesin: "6.5L V12",
     kapasitasPenumpang: "2 Seater",
     harga: "Rp 9 Milyar",
-    imageUrl: "https://i.pinimg.com/736x/11/43/1a/11431ab3e966a1a37530da7eaa5090fa.jpg",
+    imageUrl: "https://i.imgur.com/k2H15aE.png",
   ),
 
   // MOTOR
@@ -51,34 +51,34 @@ final List<Kendaraan> vehicleList = [
     tipeMesin: "4-silinder DOHC",
     kapasitasMesin: "250cc",
     harga: "Rp 107 Juta",
-    imageUrl: "https://i.pinimg.com/1200x/ba/2e/96/ba2e9693dd74e22b1d285e1b0d7c5cdf.jpg",
+    imageUrl: "https://i.imgur.com/W2ADv3T.png",
   ),
   Motor(
     nama: "Yamaha NMAX",
     tipeMesin: "1-silinder SOHC",
     kapasitasMesin: "155cc",
     harga: "Rp 35 Juta",
-    imageUrl: "https://i.pinimg.com/1200x/68/e5/0d/68e50d8f3cc851a4c5de163133fcd265.jpg",
+    imageUrl: "https://i.imgur.com/uD4u4k1.png",
   ),
   Motor(
     nama: "Honda CBR250RR",
     tipeMesin: "2-silinder DOHC",
     kapasitasMesin: "250cc",
     harga: "Rp 75 Juta",
-    imageUrl: "https://i.pinimg.com/1200x/54/7c/07/547c071a7b4ff646e00f8239a2e25b3d.jpg",
+    imageUrl: "https://i.imgur.com/YgAmf5k.png",
   ),
   Motor(
     nama: "Vespa Primavera",
     tipeMesin: "i-get, 1-silinder",
     kapasitasMesin: "150cc",
     harga: "Rp 50 Juta",
-    imageUrl: "https://i.pinimg.com/736x/33/5b/9f/335b9f16a9a42549c9f34288a62476cb.jpg",
+    imageUrl: "https://i.imgur.com/vH79p8f.png",
   ),
   Motor(
     nama: "Ducati Panigale V4",
     tipeMesin: "V4, Desmosedici Stradale",
     kapasitasMesin: "1,103cc",
     harga: "Rp 799 Juta",
-    imageUrl: "https://i.pinimg.com/736x/fa/5f/64/fa5f647a2846b8d7fc47ee01f0cf6991.jpg",
+    imageUrl: "https://i.imgur.com/W2o7g8x.png",
   ),
 ];
