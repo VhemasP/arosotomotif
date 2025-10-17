@@ -5,7 +5,7 @@ import 'motor.dart';
 final List<Kendaraan> vehicleList = [
   // MOBIL
   Mobil(
-    nama: "Toyota GR Supra",
+    nama: "Toyota GR Supra R",
     tipe: "Sports Car",
     spekMesin: "3.0L Turbo",
     kapasitasPenumpang: "2 Seater",
