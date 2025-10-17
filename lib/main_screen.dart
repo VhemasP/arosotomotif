@@ -5,6 +5,7 @@ import 'admin_screen.dart';
 import 'favorite_screen.dart';
 import 'home_screen.dart';
 import 'marketplace_screen.dart';
+import 'profile_screen.dart';
 import 'model/user.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +18,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-
   List<Widget> _pages = [];
   List<BottomNavigationBarItem> _navItems = [];
 
@@ -29,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _buildNavigation(bool isAdmin) {
     if (isAdmin) {
+      // Navigasi KHUSUS untuk Admin (TANPA PROFIL)
       _pages = [
         HomePage(user: widget.user),
         const MarketplaceScreen(),
@@ -36,21 +37,24 @@ class _MainScreenState extends State<MainScreen> {
         const AdminScreen(),
       ];
       _navItems = [
-        const BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Home'),
+        const BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         const BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.store), label: 'Marketplace'),
-        const BottomNavigationBarItem(icon: Icon(Icons.favorite_border), activeIcon: Icon(Icons.favorite), label: 'Favorites'),
-        const BottomNavigationBarItem(icon: Icon(Icons.admin_panel_settings_outlined), activeIcon: Icon(Icons.admin_panel_settings), label: 'Admin'),
+        const BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Favorites'),
+        const BottomNavigationBarItem(icon: Icon(Icons.admin_panel_settings_outlined), label: 'Admin'),
       ];
     } else {
+      // Navigasi untuk User Biasa (DENGAN PROFIL)
       _pages = [
         HomePage(user: widget.user),
         const MarketplaceScreen(),
         const FavoriteScreen(),
+        const ProfileScreen(),
       ];
       _navItems = [
-        const BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Home'),
+        const BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         const BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.store), label: 'Marketplace'),
-        const BottomNavigationBarItem(icon: Icon(Icons.favorite_border), activeIcon: Icon(Icons.favorite), label: 'Favorites'),
+        const BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Favorites'),
+        const BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profil'),
       ];
     }
   }
@@ -75,6 +79,7 @@ class _MainScreenState extends State<MainScreen> {
           items: _navItems,
           currentIndex: _selectedIndex,
           selectedItemColor: widget.user.isAdmin ? Colors.indigo.shade700 : Colors.blue.shade700,
+          unselectedItemColor: Colors.grey,
           onTap: _onItemTapped,
         ),
       ),

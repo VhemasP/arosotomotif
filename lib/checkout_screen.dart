@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model/listing.dart';
+import 'model/user.dart';
 import 'providers/marketplace_provider.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -8,17 +9,19 @@ class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key, required this.listing});
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState();
+  State<CheckoutScreen> createState() => _CheckoutPageState();
 }
 
-class _CheckoutScreenState extends State<CheckoutScreen> {
+class _CheckoutPageState extends State<CheckoutScreen> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedPaymentMethod;
   final List<String> _paymentMethods = ['Transfer Bank', 'COD (Bayar di Tempat)', 'Dompet Digital'];
 
   void _confirmPurchase() {
     if (_formKey.currentState!.validate()) {
-      Provider.of<MarketplaceProvider>(context, listen: false).purchaseListing(widget.listing);
+      final buyerEmail = Provider.of<User>(context, listen: false).email;
+
+      Provider.of<MarketplaceProvider>(context, listen: false).purchaseListing(widget.listing, buyerEmail);
 
       showDialog(
         context: context,
@@ -29,8 +32,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(ctx).pop();
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.of(ctx).popUntil((route) => route.isFirst);
               },
               child: const Text('Kembali ke Home'),
             ),
@@ -60,7 +62,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               _buildShippingDetails(),
               const SizedBox(height: 24),
               _buildPaymentMethod(),
-              const SizedBox(height: 32),
             ],
           ),
         ),
@@ -69,6 +70,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
+  // Widget untuk menampilkan ringkasan item yang dibeli
   Widget _buildSummaryCard() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +95,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
+  // Widget untuk form detail pengiriman
   Widget _buildShippingDetails() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

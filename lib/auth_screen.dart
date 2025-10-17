@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'main_screen.dart';
 import 'model/user.dart';
 
-//============================================
-// LOGIN PAGE
-//============================================
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -32,21 +29,18 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = false;
       });
 
-      // --- LOGIKA ADMIN DIMULAI DI SINI ---
-      const String adminEmail = 'admin@aros.com'; // Tentukan email admin di sini
+      const String adminEmail = 'admin@aros.com';
       final String enteredEmail = _emailController.text;
 
-      // Periksa apakah email yang dimasukkan sama dengan email admin
       final bool isAdmin = enteredEmail.toLowerCase() == adminEmail;
 
-      // Buat objek User dengan status isAdmin yang sesuai
       final user = User(
         email: enteredEmail,
         isAdmin: isAdmin,
+        name: isAdmin ? 'Admin Aros' : 'Vhemas Dwi',
+        phoneNumber: '08123456789',
       );
-      // --- LOGIKA ADMIN SELESAI ---
 
-      // Arahkan ke halaman utama setelah login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -197,9 +191,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-//============================================
-// SIGN UP PAGE (Tidak ada perubahan)
-//============================================
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
