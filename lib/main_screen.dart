@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Import FontAwesome
 import 'favorite_screen.dart';
 import 'home_screen.dart';
+import 'marketplace_screen.dart';
 import 'model/user.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,6 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
     _pages = [
       HomePage(user: widget.user),
+      const MarketplacePage(),
       const FavoritesPage(),
     ];
   }
@@ -34,15 +37,27 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
+
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: FaIcon(FontAwesomeIcons.store),
+            activeIcon: FaIcon(FontAwesomeIcons.store),
+            label: 'Marketplace',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            activeIcon: Icon(Icons.favorite),
             label: 'Favorites',
           ),
         ],
