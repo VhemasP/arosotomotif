@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'favorite_screen.dart';
 import 'home_screen.dart';
 import 'marketplace_screen.dart';
@@ -36,34 +37,42 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.store),
-            activeIcon: FaIcon(FontAwesomeIcons.store),
-            label: 'Marketplace',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            activeIcon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue.shade700,
-        onTap: _onItemTapped,
+    // Menyediakan objek 'user' ke seluruh widget di bawahnya (seperti MarketplacePage)
+    // agar bisa diakses menggunakan Provider.of<User>(context).
+    return Provider<User>.value(
+      value: widget.user,
+      child: Scaffold(
+        // IndexedStack menjaga state setiap halaman. Artinya, saat berpindah tab,
+        // posisi scroll atau input di halaman sebelumnya tidak akan hilang.
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: _pages,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          // 'fixed' memastikan semua label item terlihat, bahkan yang tidak aktif.
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              // Menggunakan ikon dari library FontAwesome
+              icon: FaIcon(FontAwesomeIcons.store),
+              activeIcon: FaIcon(FontAwesomeIcons.store),
+              label: 'Marketplace',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border),
+              activeIcon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.blue.shade700,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
