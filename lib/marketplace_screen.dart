@@ -50,7 +50,6 @@ class MarketplaceScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    // Kirim data kendaraan dan listing ke detail screen
                     builder: (context) => DetailScreen(
                       kendaraan: listing.vehicle,
                       listing: listing,
@@ -63,7 +62,7 @@ class MarketplaceScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(listing.vehicle.imageUrl),
+                    Image.asset(listing.vehicle.imageUrl),
                     const SizedBox(height: 12),
                     Text(
                       listing.vehicle.nama,
@@ -99,7 +98,7 @@ class MarketplaceScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => CheckoutPage(listing: listing),
+                            builder: (context) => CheckoutScreen(listing: listing),
                           ));
                         },
                         child: const Text('Beli Sekarang'),

@@ -107,11 +107,9 @@ class HomePage extends StatelessWidget {
                           height: 100,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
+                            child: Image.asset(
                               vehicle.imageUrl,
                               fit: BoxFit.contain,
-                              errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.directions_car, size: 50, color: Colors.grey),
                             ),
                           ),
                         ),

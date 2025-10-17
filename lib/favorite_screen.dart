@@ -4,8 +4,8 @@ import 'detail_screen.dart';
 import 'model/item_list.dart';
 import 'providers/favorite_provider.dart';
 
-class FavoritesPage extends StatelessWidget {
-  const FavoritesPage({super.key});
+class FavoriteScreen extends StatelessWidget {
+  const FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class FavoritesPage extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: ListTile(
-              leading: Image.network(vehicle.imageUrl, width: 80, fit: BoxFit.cover),
+              leading: Image.asset(vehicle.imageUrl, width: 80, fit: BoxFit.cover),
               title: Text(vehicle.nama),
               subtitle: Text(vehicle.harga),
               onTap: () {

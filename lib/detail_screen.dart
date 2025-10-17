@@ -55,6 +55,7 @@ class _DetailScreenState extends State<DetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // --- BAGIAN GAMBAR UTAMA ---
             Container(
               height: 250,
               margin: const EdgeInsets.all(16.0),
@@ -71,15 +72,15 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(
+                // DIUBAH: Menggunakan Image.asset dan menghapus errorBuilder
+                child: Image.asset(
                   widget.kendaraan.imageUrl,
                   fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) =>
-                  const Icon(Icons.broken_image, size: 100, color: Colors.grey),
                 ),
               ),
             ),
 
+            // --- BAGIAN NAMA DAN HARGA ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -106,13 +107,16 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
 
+            // --- BAGIAN RATING ---
             _buildRatingSection(),
 
+            // --- BAGIAN INFO PENJUAL ---
             if (isMarketplaceItem)
               _buildSellerInfoSection(widget.listing!),
 
             const Divider(height: 24, thickness: 1, indent: 16, endIndent: 16),
 
+            // --- BAGIAN SPESIFIKASI ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -138,12 +142,14 @@ class _DetailScreenState extends State<DetailScreen> {
           ],
         ),
       ),
+      // --- TOMBOL BELI ---
       bottomNavigationBar: isMarketplaceItem
           ? _buildBuyNowButton(context, widget.listing!)
           : null,
     );
   }
 
+  // --- WIDGET HELPERS (Tidak ada perubahan di sini) ---
 
   Widget _buildSellerInfoSection(Listing listing) {
     return Padding(
@@ -176,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CheckoutPage(listing: listing),
+              builder: (context) => CheckoutScreen(listing: listing),
             ),
           );
         },

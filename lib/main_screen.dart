@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
       _pages = [
         HomePage(user: widget.user),
         const MarketplaceScreen(),
-        const FavoritesPage(),
+        const FavoriteScreen(),
         const AdminScreen(),
       ];
       _navItems = [
@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
       _pages = [
         HomePage(user: widget.user),
         const MarketplaceScreen(),
-        const FavoritesPage(),
+        const FavoriteScreen(),
       ];
       _navItems = [
         const BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Home'),

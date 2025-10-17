@@ -3,21 +3,20 @@ import 'package:provider/provider.dart';
 import 'model/listing.dart';
 import 'providers/marketplace_provider.dart';
 
-class CheckoutPage extends StatefulWidget {
+class CheckoutScreen extends StatefulWidget {
   final Listing listing;
-  const CheckoutPage({super.key, required this.listing});
+  const CheckoutScreen({super.key, required this.listing});
 
   @override
-  State<CheckoutPage> createState() => _CheckoutPageState();
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-class _CheckoutPageState extends State<CheckoutPage> {
+class _CheckoutScreenState extends State<CheckoutScreen> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedPaymentMethod;
   final List<String> _paymentMethods = ['Transfer Bank', 'COD (Bayar di Tempat)', 'Dompet Digital'];
 
   void _confirmPurchase() {
-    // Validasi form sebelum melanjutkan
     if (_formKey.currentState!.validate()) {
       Provider.of<MarketplaceProvider>(context, listen: false).purchaseListing(widget.listing);
 
@@ -81,7 +80,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: ListTile(
-              leading: Image.network(widget.listing.vehicle.imageUrl, width: 80),
+              leading: Image.asset(widget.listing.vehicle.imageUrl, width: 80),
               title: Text(widget.listing.vehicle.nama, style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(
                 widget.listing.vehicle.harga,
