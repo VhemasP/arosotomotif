@@ -39697,7 +39697,7 @@ n===$&&A.a()
 s=this.e
 s===$&&A.a()
 r=t.p
-return A.kF(q,A.ir(B.bg,A.c([p,o,A.hb(A.art(new A.cV(s,!1,A.cZ(A.c([A.on("assets/images/logo2.png",q,140,140),B.bR,B.D_],r),B.a8,B.cX,B.Q),q),n),q,q),new A.cV(this.e,!1,new A.dw(B.e5,q,q,new A.bj(B.FD,A.bT("Copyright by Vhemas Dwi",q,q,q,A.dH(q,q,B.k.A0(0.7),q,q,q,q,q,q,q,q,12,q,q,B.X,q,q,!0,q,q,q,q,q,q,q,q),q,q),q),q),q)],r),B.K,B.zj,q),q,!1)}}
+return A.kF(q,A.ir(B.bg,A.c([p,o,A.hb(A.art(new A.cV(s,!1,A.cZ(A.c([A.on("assets/images/logo.png",q,140,140),B.bR,B.D_],r),B.a8,B.cX,B.Q),q),n),q,q),new A.cV(this.e,!1,new A.dw(B.e5,q,q,new A.bj(B.FD,A.bT("Copyright by Vhemas Dwi",q,q,q,A.dH(q,q,B.k.A0(0.7),q,q,q,q,q,q,q,q,12,q,q,B.X,q,q,!0,q,q,q,q,q,q,q,q),q,q),q),q),q)],r),B.K,B.zj,q),q,!1)}}
 A.amO.prototype={
 $0(){var s,r,q,p,o,n,m,l,k,j=null
 A.B9(B.QP)
