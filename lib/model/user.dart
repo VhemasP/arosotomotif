@@ -1,6 +1,9 @@
-
 class User {
   final String email;
+  final bool isAdmin;
 
-  User({required this.email});
+  User({
+    required this.email,
+    this.isAdmin = false,
+  });
 }

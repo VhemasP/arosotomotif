@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
-import 'model/user.dart';
 import 'main_screen.dart';
+import 'model/user.dart';
 
+//============================================
+// LOGIN PAGE
+//============================================
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -30,7 +32,21 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = false;
       });
 
-      final user = User(email: _emailController.text);
+      // --- LOGIKA ADMIN DIMULAI DI SINI ---
+      const String adminEmail = 'admin@aros.com'; // Tentukan email admin di sini
+      final String enteredEmail = _emailController.text;
+
+      // Periksa apakah email yang dimasukkan sama dengan email admin
+      final bool isAdmin = enteredEmail.toLowerCase() == adminEmail;
+
+      // Buat objek User dengan status isAdmin yang sesuai
+      final user = User(
+        email: enteredEmail,
+        isAdmin: isAdmin,
+      );
+      // --- LOGIKA ADMIN SELESAI ---
+
+      // Arahkan ke halaman utama setelah login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -53,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Container(color: Colors.black.withValues(alpha: 0.5)),
+          Container(color: Colors.black.withOpacity(0.5)),
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
@@ -63,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Image.asset('assets/images/logo2.png', height: 120),
-                    const SizedBox(height: 30.0),
+                    Image.asset('assets/images/logo.png', height: 120),
+                    const SizedBox(height: 24.0),
                     const Text(
                       'Selamat Datang',
                       textAlign: TextAlign.center,
@@ -82,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 48.0),
                     TextFormField(
                       controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
                       style: const TextStyle(color: Colors.white),
                       decoration: const InputDecoration(
                         labelText: 'Email',
@@ -160,7 +177,6 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(color: Colors.white70)),
                         TextButton(
                           onPressed: () {
-                            // Navigasi ke SignUpPage
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const SignUpPage()),
@@ -181,6 +197,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+//============================================
+// SIGN UP PAGE (Tidak ada perubahan)
+//============================================
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -195,7 +214,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
   bool _passwordVisible = false;
-
 
   void _signUp() async {
     if (_formKey.currentState!.validate()) {
@@ -236,7 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-          Container(color: Colors.black.withValues(alpha: 0.5)),
+          Container(color: Colors.black.withOpacity(0.5)),
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
@@ -246,7 +264,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Image.asset('assets/images/logo2.png', height: 100),
+                    Image.asset('assets/images/logo.png', height: 100),
                     const SizedBox(height: 24.0),
                     const Text('Buat Akun Baru',
                         textAlign: TextAlign.center,
@@ -341,7 +359,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         backgroundColor: Colors.blue.shade700,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        // DIPERBAIKI: Shape didefinisikan langsung di sini
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),

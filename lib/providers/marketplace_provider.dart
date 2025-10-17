@@ -1,20 +1,21 @@
-// lib/providers/marketplace_provider.dart
 import 'package:flutter/material.dart';
 import '../model/listing.dart';
 import '../model/item_list.dart';
 
 class MarketplaceProvider extends ChangeNotifier {
   final List<Listing> _listings = [];
+  final List<Listing> _soldItems = [];
 
   List<Listing> get listings => _listings;
+  List<Listing> get soldItems => _soldItems;
+  int get totalSales => _soldItems.length;
 
   MarketplaceProvider() {
-    // Data awal untuk contoh
     _listings.add(
         Listing(
           vehicle: vehicleList[0],
           sellerEmail: 'seller1@example.com',
-          description: 'Kondisi mulus, jarang dipakai. Servis rutin di dealer resmi.',
+          description: 'Kondisi mulus, jarang dipakai. Servis rutin.',
           location: 'Magetan',
           datePosted: DateTime.now().subtract(const Duration(days: 2)),
         )
@@ -23,7 +24,7 @@ class MarketplaceProvider extends ChangeNotifier {
         Listing(
           vehicle: vehicleList[2],
           sellerEmail: 'seller2@example.com',
-          description: 'Motor rawatan, surat-surat lengkap. Pajak hidup.',
+          description: 'Motor rawatan, surat-surat lengkap.',
           location: 'Surabaya',
           datePosted: DateTime.now().subtract(const Duration(days: 5)),
         )
@@ -35,8 +36,8 @@ class MarketplaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // DITAMBAHKAN: Logika untuk membeli
   void purchaseListing(Listing listingToPurchase) {
+    _soldItems.add(listingToPurchase);
     _listings.removeWhere((listing) => listing.vehicle.nama == listingToPurchase.vehicle.nama && listing.sellerEmail == listingToPurchase.sellerEmail);
     notifyListeners();
   }

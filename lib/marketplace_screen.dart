@@ -1,21 +1,16 @@
-// lib/marketplace_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'checkout_screen.dart';
 import 'detail_screen.dart';
 import 'providers/marketplace_provider.dart';
-import 'sell_vehicle_page.dart';
-import 'model/user.dart';
 
-class MarketplacePage extends StatelessWidget {
-  const MarketplacePage({super.key});
+class MarketplaceScreen extends StatelessWidget {
+  const MarketplaceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final marketplaceProvider = Provider.of<MarketplaceProvider>(context);
     final listings = marketplaceProvider.listings;
-    final currentUser = Provider.of<User>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -23,22 +18,9 @@ class MarketplacePage extends StatelessWidget {
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add_circle_outline),
-            tooltip: 'Jual Kendaraan',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SellVehiclePage(userEmail: currentUser.email),
-                ),
-              );
-            },
-          )
-        ],
       ),
       body: listings.isEmpty
+      // Tampilan jika tidak ada item yang dijual
           ? Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +34,7 @@ class MarketplacePage extends StatelessWidget {
           ],
         ),
       )
+      // Tampilan jika ada item yang dijual
           : ListView.builder(
         padding: const EdgeInsets.all(8.0),
         itemCount: listings.length,
@@ -67,6 +50,7 @@ class MarketplacePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
+                    // Kirim data kendaraan dan listing ke detail screen
                     builder: (context) => DetailScreen(
                       kendaraan: listing.vehicle,
                       listing: listing,
