@@ -1,3 +1,4 @@
+// lib/providers/marketplace_provider.dart
 import 'package:flutter/material.dart';
 import '../model/listing.dart';
 import '../model/item_list.dart';
@@ -8,6 +9,7 @@ class MarketplaceProvider extends ChangeNotifier {
   List<Listing> get listings => _listings;
 
   MarketplaceProvider() {
+    // Data awal untuk contoh
     _listings.add(
         Listing(
           vehicle: vehicleList[0],
@@ -30,6 +32,12 @@ class MarketplaceProvider extends ChangeNotifier {
 
   void addListing(Listing newListing) {
     _listings.insert(0, newListing);
+    notifyListeners();
+  }
+
+  // DITAMBAHKAN: Logika untuk membeli
+  void purchaseListing(Listing listingToPurchase) {
+    _listings.removeWhere((listing) => listing.vehicle.nama == listingToPurchase.vehicle.nama && listing.sellerEmail == listingToPurchase.sellerEmail);
     notifyListeners();
   }
 }
