@@ -7,6 +7,7 @@ import 'model/kendaraan.dart';
 import 'model/mobil.dart';
 import 'model/motor.dart';
 import 'model/listing.dart';
+import 'model/user.dart';
 
 class DetailScreen extends StatefulWidget {
   final Kendaraan kendaraan;
@@ -72,7 +73,6 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                // DIUBAH: Menggunakan Image.asset dan menghapus errorBuilder
                 child: Image.asset(
                   widget.kendaraan.imageUrl,
                   fit: BoxFit.contain,
@@ -110,7 +110,7 @@ class _DetailScreenState extends State<DetailScreen> {
             // --- BAGIAN RATING ---
             _buildRatingSection(),
 
-            // --- BAGIAN INFO PENJUAL ---
+            // --- BAGIAN INFO PENJUAL (Hanya tampil jika dari marketplace) ---
             if (isMarketplaceItem)
               _buildSellerInfoSection(widget.listing!),
 
@@ -142,14 +142,12 @@ class _DetailScreenState extends State<DetailScreen> {
           ],
         ),
       ),
-      // --- TOMBOL BELI ---
+      // --- TOMBOL BELI (Hanya tampil jika dari marketplace) ---
       bottomNavigationBar: isMarketplaceItem
           ? _buildBuyNowButton(context, widget.listing!)
           : null,
     );
   }
-
-  // --- WIDGET HELPERS (Tidak ada perubahan di sini) ---
 
   Widget _buildSellerInfoSection(Listing listing) {
     return Padding(
@@ -175,6 +173,8 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _buildBuyNowButton(BuildContext context, Listing listing) {
+    final currentUser = Provider.of<User>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ElevatedButton.icon(
@@ -182,7 +182,10 @@ class _DetailScreenState extends State<DetailScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CheckoutScreen(listing: listing),
+              builder: (_) => Provider<User>.value(
+                value: currentUser,
+                child: CheckoutScreen(listing: listing),
+              ),
             ),
           );
         },

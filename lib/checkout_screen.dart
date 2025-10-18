@@ -9,10 +9,10 @@ class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key, required this.listing});
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutPageState();
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-class _CheckoutPageState extends State<CheckoutScreen> {
+class _CheckoutScreenState extends State<CheckoutScreen> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedPaymentMethod;
   final List<String> _paymentMethods = ['Transfer Bank', 'COD (Bayar di Tempat)', 'Dompet Digital'];
@@ -39,6 +39,13 @@ class _CheckoutPageState extends State<CheckoutScreen> {
           ],
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Harap lengkapi semua data yang diperlukan.'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -54,6 +61,8 @@ class _CheckoutPageState extends State<CheckoutScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
+          // DITAMBAHKAN: Validasi otomatis saat pengguna berinteraksi
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,7 +79,6 @@ class _CheckoutPageState extends State<CheckoutScreen> {
     );
   }
 
-  // Widget untuk menampilkan ringkasan item yang dibeli
   Widget _buildSummaryCard() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +103,6 @@ class _CheckoutPageState extends State<CheckoutScreen> {
     );
   }
 
-  // Widget untuk form detail pengiriman
   Widget _buildShippingDetails() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +143,9 @@ class _CheckoutPageState extends State<CheckoutScreen> {
             return DropdownMenuItem<String>(value: method, child: Text(method));
           }).toList(),
           onChanged: (String? newValue) {
-            setState(() { _selectedPaymentMethod = newValue; });
+            setState(() {
+              _selectedPaymentMethod = newValue;
+            });
           },
           validator: (value) => value == null ? 'Metode pembayaran harus dipilih' : null,
         ),

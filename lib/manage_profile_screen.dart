@@ -37,12 +37,8 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
 
   void _saveProfile() {
     if (_formKey.currentState!.validate()) {
-      // Ambil objek User dari Provider untuk diubah
       final user = Provider.of<User>(context, listen: false);
 
-      // Update data di model User
-      // Di aplikasi nyata, data ini akan dikirim ke server/database.
-      // Di sini kita hanya mengubahnya di state lokal.
       setState(() {
         user.name = _nameController.text;
         user.phoneNumber = _phoneController.text;
@@ -123,7 +119,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock_outline),
                 ),
-                // Validator bisa ditambahkan di sini untuk memeriksa sandi lama
               ),
               const SizedBox(height: 12),
               TextFormField(
@@ -137,7 +132,6 @@ class _ManageProfileScreenState extends State<ManageProfileScreen> {
               ),
               const SizedBox(height: 32),
 
-              // --- Tombol Simpan ---
               ElevatedButton(
                 onPressed: _saveProfile,
                 style: ElevatedButton.styleFrom(
